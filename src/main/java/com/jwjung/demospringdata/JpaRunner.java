@@ -5,6 +5,7 @@
 
 package com.jwjung.demospringdata;
 
+import com.jwjung.demospringdata.entity.Study;
 import com.jwjung.demospringdata.entity.TbipsMemEntity;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -28,6 +29,10 @@ public class JpaRunner implements ApplicationRunner {
         tbipsMemEntity.setPassword("aaaa");
 //        Session session = entityManager.unwrap(Session.class);
 //        session.save(tbipsMemEntity);
+        Study study = new Study();
+        study.setName("juwon");
+        study.setOwner(tbipsMemEntity);
         entityManager.persist(tbipsMemEntity);
+        entityManager.persist(study);
     }
 }
