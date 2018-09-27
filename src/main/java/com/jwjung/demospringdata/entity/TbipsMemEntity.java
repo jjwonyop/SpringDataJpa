@@ -7,11 +7,14 @@ package com.jwjung.demospringdata.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "TbipsMem")
 public class TbipsMemEntity {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
 
     @Column(unique = true, nullable = false)
@@ -28,6 +31,18 @@ public class TbipsMemEntity {
 
     @Transient
     private String no;
+
+    @OneToMany(mappedBy = "owner")
+    // 끝이 현재 클래스(단방향)
+    private Set<Study> studies = new HashSet<Study>();
+
+    public Set<Study> getStudies() {
+        return studies;
+    }
+
+    public void setStudies(Set<Study> studies) {
+        this.studies = studies;
+    }
 
     public Address getHomeAddress() {
         return homeAddress;
@@ -89,5 +104,15 @@ public class TbipsMemEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void addStudies(Study study) {
+        this.studies.add(study);
+        study.setOwner(this);
+    }
+
+    public void removeStudies(Study study) {
+        this.studies.remove(study);
+        study.setOwner(null);
     }
 }
