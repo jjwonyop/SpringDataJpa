@@ -6,6 +6,8 @@
 package com.jwjung.demospringdata;
 
 import com.jwjung.demospringdata.entity.Post;
+import com.jwjung.demospringdata.repository.PostRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -24,6 +26,9 @@ public class JpaRunner implements ApplicationRunner {
 
     @PersistenceContext
     EntityManager entityManager;
+
+    @Autowired
+    PostRepository postRepository;
 
     @Override
     @Transactional
@@ -94,6 +99,11 @@ public class JpaRunner implements ApplicationRunner {
          */
         List<Post> posts1 = entityManager.createNativeQuery("SELECT * from post", Post.class).getResultList();
         posts1.forEach(System.out::println);
+        System.out.println("==========================================");
 
+        /**
+         * JPA Repository 사용
+         */
+        postRepository.findAll().forEach(System.out::println);
     }
 }
