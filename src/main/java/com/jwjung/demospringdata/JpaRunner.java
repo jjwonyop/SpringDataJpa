@@ -5,8 +5,10 @@
 
 package com.jwjung.demospringdata;
 
+import com.jwjung.demospringdata.entity.Comment;
 import com.jwjung.demospringdata.entity.Post;
 import com.jwjung.demospringdata.repository.PostRepository;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -44,20 +46,20 @@ public class JpaRunner implements ApplicationRunner {
 //        entityManager.persist(tbipsMemEntity);
 //        entityManager.persist(study);
 
-//        Post post = new Post();
-//        post.setTitle("1입니다.");
-//
-//        Comment comment = new Comment();
-//        comment.setComment("gma");
-//
-//        post.addComment(comment);
-//
-//        Comment comment1 = new Comment();
-//        comment1.setComment("qmd");
-//
-//        post.addComment(comment1);
+        Post post = new Post();
+        post.setTitle("2입니다.");
 
-//        Session session = entityManager.unwrap(Session.class);
+        Comment comment = new Comment();
+        comment.setComment("ama");
+
+        post.addComment(comment);
+
+        Comment comment1 = new Comment();
+        comment1.setComment("wmd");
+
+        post.addComment(comment1);
+
+        Session session = entityManager.unwrap(Session.class);
 //        Post post = session.get(Post.class, 4L);
 //        System.out.println("==============");
 //        System.out.println(post.getTitle());
@@ -66,7 +68,7 @@ public class JpaRunner implements ApplicationRunner {
 //            System.out.println(str.getComment());
 //            System.out.println("===================");
 //        });
-////        session.save(post);
+        session.save(post);
 //        Comment comment = session.get(Comment.class, 5L);
 //        System.out.println("=======================");
 //        System.out.println(comment.getPost().getTitle());
