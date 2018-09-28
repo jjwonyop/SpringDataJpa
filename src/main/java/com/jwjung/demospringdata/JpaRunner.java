@@ -29,8 +29,12 @@ public class JpaRunner implements ApplicationRunner {
     @PersistenceContext
     EntityManager entityManager;
 
+    private PostRepository postRepository;
+
     @Autowired
-    PostRepository postRepository;
+    public JpaRunner(PostRepository postRepository) {
+        this.postRepository = postRepository;
+    }
 
     @Override
     @Transactional
