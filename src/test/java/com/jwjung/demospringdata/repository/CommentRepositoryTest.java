@@ -13,7 +13,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,17 +28,23 @@ public class CommentRepositoryTest {
     @Test
     @Rollback(false)
     public void save() {
-        Comment comment = new Comment();
-        comment.setComment("Testing");
-        Comment comment1 = commentRepository.save(comment);
-        assertThat(comment1.getComment()).isEqualTo(comment.getComment());
-        assertThat(comment.getId()).isEqualTo(comment1.getId());
+//        Comment comment = new Comment();
+//        comment.setComment("Testing");
+//        Comment comment1 = commentRepository.save(comment);
+//        assertThat(comment1.getComment()).isEqualTo(comment.getComment());
+//        assertThat(comment.getId()).isEqualTo(comment1.getId());
+//
+//        List<Comment> all = commentRepository.findAll();
+//        assertThat(all.size()).isEqualTo(1);
+//
+//        Long count = commentRepository.count();
+//        assertThat(count).isEqualTo(1);
 
-        List<Comment> all = commentRepository.findAll();
-        assertThat(all.size()).isEqualTo(1);
+        commentRepository.save(null);
+        Optional<Comment> byId = commentRepository.findById(100l);
 
-        Long count = commentRepository.count();
-        assertThat(count).isEqualTo(1);
-
+        // Spring boot jpa는 collection이 널이 아님 --> Size체크가 나음
+        assertThat(byId).isEmpty();
+//        Comment comment = byId.orElseThrow(IllegalAccessError::new);
     }
 }
